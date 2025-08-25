@@ -1,6 +1,10 @@
 using FirefliesBackend.Data;
 using FirefliesBackend.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +47,40 @@ builder.Services.AddCors(o => o.AddPolicy("AllowReactDev", p =>
     p.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod()
 ));
 
+
+
+// Add JWT Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            RequireSignedTokens = true, // Ensure a signature exists
+            ValidateIssuer = true,
+            ValidIssuer = "ProjectManagementSystem",
+            ValidateAudience = true,
+            ValidAudience = "FirefliesApp",
+            ValidateLifetime = true,
+           
+            
+            ValidateActor = false,
+
+            ValidateIssuerSigningKey = true,
+              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-super-long-development-secret-key-that-is-secure")),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+
+
 var app = builder.Build();
+
+
+// Add Authentication and Authorization middleware
+app.UseAuthentication();
+app.UseAuthorization(); 
+
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

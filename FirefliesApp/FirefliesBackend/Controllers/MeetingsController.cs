@@ -14,6 +14,7 @@ using FirefliesBackend.Services;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using FileResultModel = FirefliesBackend.Models.FileResult;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FirefliesBackend.Controllers
 {
