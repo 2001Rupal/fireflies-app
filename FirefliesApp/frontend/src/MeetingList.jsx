@@ -1,9 +1,312 @@
 
 
 
+// import { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { RefreshCw, Calendar, Clock, AlertCircle, Folder, Zap, Search, Filter, Download, MoreVertical } from "lucide-react";
+
+// const API = import.meta.env.VITE_API_BASE_URL || "";
+
+// function parseDate(value) {
+//   if (!value) return null;
+//   const n = typeof value === "number" ? value : (Number(value) || null);
+//   return n ? new Date(n) : new Date(value);
+// }
+
+// function formatDate(d) {
+//   if (!d) return "";
+//   return d.toLocaleDateString('en-US', { 
+//     month: 'short', 
+//     day: 'numeric', 
+//     year: 'numeric' 
+//   });
+// }
+
+// function formatTime(d) {
+//   if (!d) return "";
+//   return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+// }
+
+// function formatDuration(seconds) {
+//   if (seconds == null) return "";
+//   const s = Math.round(Number(seconds));
+//   if (s < 60) return `${s} min`;
+//   const m = Math.floor(s / 60);
+//   const rem = s % 60;
+//   return rem === 0 ? `${m} min` : `${m}m ${rem}s`;
+// }
+
+// export default function MeetingList() {
+//   const [meetings, setMeetings] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+//   const [searchTerm, setSearchTerm] = useState("");
+//     const [isOnline, setIsOnline] = useState(navigator.onLine); 
+//   const navigate = useNavigate();
+
+//   async function load() {
+//     setLoading(true);
+//     setError(null);
+//     try {
+//       const res = await fetch(`${API}/api/external/meetings`);
+//       if (!res.ok) throw new Error(await res.text());
+//       const data = await res.json();
+//       setMeetings(data);
+//     } catch (err) {
+//       console.error(err);
+//       setError("Failed to load meetings. Please try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   }
+
+//   useEffect(() => { load(); }, []);
+
+//   const filteredMeetings = meetings.filter(meeting =>
+//     meeting.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//     formatDate(parseDate(meeting.date))?.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   const LoadingSkeleton = () => (
+//     <div className="p-6 space-y-3">
+//       {[...Array(5)].map((_, i) => (
+//         <div
+//           key={i}
+//           className="h-16 bg-slate-800/30 backdrop-blur-md rounded-xl border border-slate-700/20 animate-pulse"
+//         />
+//       ))}
+//     </div>
+//   );
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900/60 to-purple-900/70 text-white rounded-3xl overflow-hidden relative">
+//       {/* Animated background elements */}
+//       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+//         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+//         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl "></div>
+//       </div>
+
+//       <div className="container mx-auto px-4 py-8 relative z-10 ">
+//         {/* Header Section */}
+//         <div className="relative overflow-hidden bg-slate-800/40 backdrop-blur-xl rounded-3xl p-6 mb-8 mt-5  border border-slate-700/40 shadow-lg">
+//           {/* Glow accents */}
+//           <div className="absolute   inset-0 -z-10 ">
+//             <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/10 blur-3xl rounded-full"></div>
+//             <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 blur-3xl rounded-full"></div>
+//           </div>
+
+//           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 ">
+//             {/* Title + Icon */}
+//             <div className="flex items-center gap-4 ">
+//               <div className="p-3 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 shadow-md ">
+//                 <Zap size={22} className="text-white" />
+//               </div>
+//               <div>
+//                 <h1 className="text-3xl pt-3 font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+//                   Meeting Library
+//                 </h1>
+                
+//               </div>
+//             </div>
+
+//             {/* Right Section */}
+//             <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+//               {/* Search Bar */}
+//               <div className="relative flex-1 lg:flex-initial">
+//                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
+//                 <input
+//                   type="text"
+//                   placeholder="Search meetings..."
+//                   value={searchTerm}
+//                   onChange={(e) => setSearchTerm(e.target.value)}
+//                   className="w-full lg:w-64 pl-10 pr-4 py-2.5 bg-slate-700/40 border border-slate-600/40 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+//                 />
+//               </div>
+
+             
+//             </div>
+//           </div>
+
+//           {/* Stats Bar */}
+//           <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-slate-700/40">
+//             <div className="flex items-center gap-2">
+//               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+//               <span className="text-sm text-slate-300">Active System</span>
+//             </div>
+//             <div className="text-sm text-slate-400">•</div>
+//             <div className="text-sm text-slate-300">
+//               {filteredMeetings.length} meeting{filteredMeetings.length !== 1 ? 's' : ''} found
+//             </div>
+//             <div className="text-sm text-slate-400">•</div>
+//             <div className="text-sm text-slate-300">
+//               Last updated: {new Date().toLocaleTimeString()}
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Error State */}
+//         {error && (
+//           <div className="bg-rose-900/20 border border-rose-800/30 rounded-2xl p-4 mb-6 flex items-center gap-3 backdrop-blur-md">
+//             <div className="w-6 h-6 bg-rose-600 rounded-full flex items-center justify-center flex-shrink-0">
+//               <AlertCircle size={14} />
+//             </div>
+//             <span className="text-rose-200 text-sm">{error}</span>
+//             <button
+//               onClick={load}
+//               className="ml-auto bg-rose-700/30 hover:bg-rose-700/40 px-3 py-1 rounded-lg text-sm text-rose-100 transition-colors"
+//             >
+//               Retry
+//             </button>
+//           </div>
+//         )}
+
+//         {/* Loading State */}
+//         {loading && <LoadingSkeleton />}
+
+//         {/* Meetings Table */}
+//         {!loading && filteredMeetings.length > 0 && (
+//           <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-700/30 shadow-lg">
+//             <div className="overflow-x-auto">
+//               <table className="w-full">
+//                 <thead>
+//                   <tr className="bg-slate-700/50 border-b border-slate-700/30">
+//                     <th className="p-4 pl-6 text-left text-slate-300 font-medium text-sm w-[40%]">
+//                       Meeting Title
+//                     </th>
+//                     <th className="p-4 text-left text-slate-300 font-medium text-sm w-[20%]">
+//                       Date
+//                     </th>
+//                     <th className="p-4 text-left text-slate-300 font-medium text-sm w-[20%]">
+//                       Time
+//                     </th>
+//                     <th className="p-4 text-left text-slate-300 font-medium text-sm w-[15%]">
+//                       Duration
+//                     </th>
+                    
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {filteredMeetings.map((m, index) => {
+//                     const d = parseDate(m.date);
+//                     return (
+//                       <tr
+//                         key={m.id}
+//                         className="cursor-pointer transition-all duration-200 border-b border-slate-700/30 last:border-b-0 hover:bg-slate-700/30 group"
+//                       >
+//                         <td 
+//                           className="p-4 pl-6"
+//                           onClick={() => navigate(`/meetings/${m.id}`)}
+//                         >
+//                           <div className="flex items-center gap-3">
+//                             <div className="w-10 h-10 bg-slate-700/40 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
+//                               <Folder size={18} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
+//                             </div>
+//                             <div className="min-w-0">
+//                               <div className="font-medium text-white group-hover:text-blue-300 transition-colors truncate">
+//                                 {m.title || 'Untitled Meeting'}
+//                               </div>
+                              
+//                             </div>
+//                           </div>
+//                         </td>
+//                         <td 
+//                           className="p-4"
+//                           onClick={() => navigate(`/meetings/${m.id}`)}
+//                         >
+//                           <div className="flex items-center gap-2 text-slate-300 text-sm">
+//                             <Calendar size={14} className="text-slate-400 flex-shrink-0" />
+//                             <span className="truncate">{formatDate(d)}</span>
+//                           </div>
+//                         </td>
+//                         <td 
+//                           className="p-4"
+//                           onClick={() => navigate(`/meetings/${m.id}`)}
+//                         >
+//                           <div className="flex items-center gap-2 text-slate-300 text-sm">
+//                             <Clock size={14} className="text-slate-400 flex-shrink-0" />
+//                             <span className="truncate">{formatTime(d)}</span>
+//                           </div>
+//                         </td>
+//                         <td 
+//                           className="p-4"
+//                           onClick={() => navigate(`/meetings/${m.id}`)}
+//                         >
+//                           <span className="bg-slate-700/40 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-600/30 inline-block group-hover:bg-blue-500/20 group-hover:border-blue-500/30 transition-colors">
+//                             {formatDuration(m.duration)}
+//                           </span>
+//                         </td>
+                       
+//                       </tr>
+//                     );
+//                   })}
+//                 </tbody>
+//               </table>
+//             </div>
+
+//             {/* Table Footer */}
+//             <div className="bg-slate-700/50 border-t border-slate-700/30 px-6 py-3">
+//               <div className="flex items-center justify-between">
+//                 <span className="text-sm text-slate-400">
+//                   Showing {filteredMeetings.length} of {meetings.length} meetings
+//                 </span>
+//                 <div className="flex items-center gap-2">
+//                   <button className="px-3 py-1 text-sm text-slate-300 hover:text-white transition-colors">
+//                     Previous
+//                   </button>
+//                   <span className="text-sm text-slate-400">•</span>
+//                   <button className="px-3 py-1 text-sm text-slate-300 hover:text-white transition-colors">
+//                     Next
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+
+
+//         {/* Empty State */}
+//         {!loading && filteredMeetings.length === 0 && (
+//           <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-12 text-center border border-slate-700/30">
+//             <div className="w-20 h-20 bg-slate-700/40 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-600/30">
+//               <Calendar size={36} className="text-slate-400" />
+//             </div>
+//             <h3 className="text-xl font-semibold text-white mb-3">
+//               {searchTerm ? "No meetings found" : "No meetings yet"}
+//             </h3>
+//             <p className="text-slate-300 mb-6 max-w-md mx-auto">
+//               {searchTerm 
+//                 ? `No meetings match your search for "${searchTerm}". Try different keywords.`
+//                 : "Your meetings will appear here once they're processed and available."
+//               }
+//             </p>
+//             <div className="flex gap-3 justify-center">
+//               <button
+//                 onClick={load}
+//                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg"
+//               >
+//                 <RefreshCw size={16} />
+//                 Refresh
+//               </button>
+//               {searchTerm && (
+//                 <button
+//                   onClick={() => setSearchTerm("")}
+//                   className="bg-slate-700/40 hover:bg-slate-700/60 border border-slate-600/40 text-white px-6 py-2.5 rounded-xl transition-all duration-300"
+//                 >
+//                   Clear Search
+//                 </button>
+//               )}
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RefreshCw, Calendar, Clock, AlertCircle, Folder, Zap, Search, Filter, Download, MoreVertical } from "lucide-react";
+import { RefreshCw, Calendar, Clock, AlertCircle, Folder, Zap, Search } from "lucide-react";
 
 const API = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -15,11 +318,7 @@ function parseDate(value) {
 
 function formatDate(d) {
   if (!d) return "";
-  return d.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  });
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 function formatTime(d) {
@@ -41,9 +340,11 @@ export default function MeetingList() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const navigate = useNavigate();
 
   async function load() {
+    if (!isOnline) return;
     setLoading(true);
     setError(null);
     try {
@@ -59,7 +360,22 @@ export default function MeetingList() {
     }
   }
 
+  // Load meetings initially
   useEffect(() => { load(); }, []);
+
+  // Online/offline event listeners
+  useEffect(() => {
+    function handleOnline() { setIsOnline(true); }
+    function handleOffline() { setIsOnline(false); }
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   const filteredMeetings = meetings.filter(meeting =>
     meeting.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -79,38 +395,33 @@ export default function MeetingList() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900/60 to-purple-900/70 text-white rounded-3xl overflow-hidden relative">
-      {/* Animated background elements */}
+      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl "></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10 ">
-        {/* Header Section */}
-        <div className="relative overflow-hidden bg-slate-800/40 backdrop-blur-xl rounded-3xl p-6 mb-8 mt-5  border border-slate-700/40 shadow-lg">
-          {/* Glow accents */}
-          <div className="absolute   inset-0 -z-10 ">
+      <div className="container mx-auto px-4 py-8 relative z-10">
+        {/* Header */}
+        <div className="relative overflow-hidden bg-slate-800/40 backdrop-blur-xl rounded-3xl p-6 mb-8 mt-5 border border-slate-700/40 shadow-lg">
+          <div className="absolute inset-0 -z-10">
             <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/10 blur-3xl rounded-full"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 blur-3xl rounded-full"></div>
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 ">
-            {/* Title + Icon */}
-            <div className="flex items-center gap-4 ">
-              <div className="p-3 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 shadow-md ">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 shadow-md">
                 <Zap size={22} className="text-white" />
               </div>
               <div>
                 <h1 className="text-3xl pt-3 font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Meeting Library
                 </h1>
-                
               </div>
             </div>
 
-            {/* Right Section */}
             <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-              {/* Search Bar */}
               <div className="relative flex-1 lg:flex-initial">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
                 <input
@@ -121,16 +432,14 @@ export default function MeetingList() {
                   className="w-full lg:w-64 pl-10 pr-4 py-2.5 bg-slate-700/40 border border-slate-600/40 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                 />
               </div>
-
-             
             </div>
           </div>
 
-          {/* Stats Bar */}
+          {/* Stats Bar with Online/Offline */}
           <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-slate-700/40">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-slate-300">Active System</span>
+              <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-400 animate-pulse' : 'bg-red-500 animate-ping'}`}></div>
+              <span className="text-sm text-slate-300">{isOnline ? "System Active" : "Offline"}</span>
             </div>
             <div className="text-sm text-slate-400">•</div>
             <div className="text-sm text-slate-300">
@@ -143,13 +452,13 @@ export default function MeetingList() {
           </div>
         </div>
 
-        {/* Error State */}
+        {/* Error */}
         {error && (
           <div className="bg-rose-900/20 border border-rose-800/30 rounded-2xl p-4 mb-6 flex items-center gap-3 backdrop-blur-md">
             <div className="w-6 h-6 bg-rose-600 rounded-full flex items-center justify-center flex-shrink-0">
               <AlertCircle size={14} />
             </div>
-            <span className="text-rose-200 text-sm">{error}</span>
+            <span className="text-rose-200  text-sm"></span>
             <button
               onClick={load}
               className="ml-auto bg-rose-700/30 hover:bg-rose-700/40 px-3 py-1 rounded-lg text-sm text-rose-100 transition-colors"
@@ -159,43 +468,29 @@ export default function MeetingList() {
           </div>
         )}
 
-        {/* Loading State */}
         {loading && <LoadingSkeleton />}
 
-        {/* Meetings Table */}
         {!loading && filteredMeetings.length > 0 && (
           <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-700/30 shadow-lg">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-slate-700/50 border-b border-slate-700/30">
-                    <th className="p-4 pl-6 text-left text-slate-300 font-medium text-sm w-[40%]">
-                      Meeting Title
-                    </th>
-                    <th className="p-4 text-left text-slate-300 font-medium text-sm w-[20%]">
-                      Date
-                    </th>
-                    <th className="p-4 text-left text-slate-300 font-medium text-sm w-[20%]">
-                      Time
-                    </th>
-                    <th className="p-4 text-left text-slate-300 font-medium text-sm w-[15%]">
-                      Duration
-                    </th>
-                    
+                    <th className="p-4 pl-6 text-left text-slate-300 font-medium text-sm w-[40%]">Meeting Title</th>
+                    <th className="p-4 text-left text-slate-300 font-medium text-sm w-[20%]">Date</th>
+                    <th className="p-4 text-left text-slate-300 font-medium text-sm w-[20%]">Time</th>
+                    <th className="p-4 text-left text-slate-300 font-medium text-sm w-[15%]">Duration</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredMeetings.map((m, index) => {
+                  {filteredMeetings.map((m) => {
                     const d = parseDate(m.date);
                     return (
                       <tr
                         key={m.id}
                         className="cursor-pointer transition-all duration-200 border-b border-slate-700/30 last:border-b-0 hover:bg-slate-700/30 group"
                       >
-                        <td 
-                          className="p-4 pl-6"
-                          onClick={() => navigate(`/meetings/${m.id}`)}
-                        >
+                        <td className="p-4 pl-6" onClick={() => navigate(`/meetings/${m.id}`)}>
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-slate-700/40 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors">
                               <Folder size={18} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
@@ -204,37 +499,26 @@ export default function MeetingList() {
                               <div className="font-medium text-white group-hover:text-blue-300 transition-colors truncate">
                                 {m.title || 'Untitled Meeting'}
                               </div>
-                              
                             </div>
                           </div>
                         </td>
-                        <td 
-                          className="p-4"
-                          onClick={() => navigate(`/meetings/${m.id}`)}
-                        >
+                        <td className="p-4" onClick={() => navigate(`/meetings/${m.id}`)}>
                           <div className="flex items-center gap-2 text-slate-300 text-sm">
                             <Calendar size={14} className="text-slate-400 flex-shrink-0" />
                             <span className="truncate">{formatDate(d)}</span>
                           </div>
                         </td>
-                        <td 
-                          className="p-4"
-                          onClick={() => navigate(`/meetings/${m.id}`)}
-                        >
+                        <td className="p-4" onClick={() => navigate(`/meetings/${m.id}`)}>
                           <div className="flex items-center gap-2 text-slate-300 text-sm">
                             <Clock size={14} className="text-slate-400 flex-shrink-0" />
                             <span className="truncate">{formatTime(d)}</span>
                           </div>
                         </td>
-                        <td 
-                          className="p-4"
-                          onClick={() => navigate(`/meetings/${m.id}`)}
-                        >
+                        <td className="p-4" onClick={() => navigate(`/meetings/${m.id}`)}>
                           <span className="bg-slate-700/40 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-600/30 inline-block group-hover:bg-blue-500/20 group-hover:border-blue-500/30 transition-colors">
                             {formatDuration(m.duration)}
                           </span>
                         </td>
-                       
                       </tr>
                     );
                   })}
@@ -242,37 +526,30 @@ export default function MeetingList() {
               </table>
             </div>
 
-            {/* Table Footer */}
             <div className="bg-slate-700/50 border-t border-slate-700/30 px-6 py-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-slate-400">
                   Showing {filteredMeetings.length} of {meetings.length} meetings
                 </span>
                 <div className="flex items-center gap-2">
-                  <button className="px-3 py-1 text-sm text-slate-300 hover:text-white transition-colors">
-                    Previous
-                  </button>
+                  <button className="px-3 py-1 text-sm text-slate-300 hover:text-white transition-colors">Previous</button>
                   <span className="text-sm text-slate-400">•</span>
-                  <button className="px-3 py-1 text-sm text-slate-300 hover:text-white transition-colors">
-                    Next
-                  </button>
+                  <button className="px-3 py-1 text-sm text-slate-300 hover:text-white transition-colors">Next</button>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-
-        {/* Empty State */}
         {!loading && filteredMeetings.length === 0 && (
-          <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-12 text-center border border-slate-700/30">
+          <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-12 text-center border border-slate-700/30 mb-5">
             <div className="w-20 h-20 bg-slate-700/40 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-600/30">
               <Calendar size={36} className="text-slate-400" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">
               {searchTerm ? "No meetings found" : "No meetings yet"}
             </h3>
-            <p className="text-slate-300 mb-6 max-w-md mx-auto">
+            <p className="text-slate-300  mb-8 mx-auto">
               {searchTerm 
                 ? `No meetings match your search for "${searchTerm}". Try different keywords.`
                 : "Your meetings will appear here once they're processed and available."
@@ -281,7 +558,8 @@ export default function MeetingList() {
             <div className="flex gap-3 justify-center">
               <button
                 onClick={load}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg"
+                disabled={!isOnline}
+                className={`bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg ${!isOnline ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <RefreshCw size={16} />
                 Refresh

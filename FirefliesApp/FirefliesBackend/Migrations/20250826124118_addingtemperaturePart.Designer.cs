@@ -4,6 +4,7 @@ using FirefliesBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirefliesBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250826124118_addingtemperaturePart")]
+    partial class addingtemperaturePart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +34,6 @@ namespace FirefliesBackend.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ActionItems")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("AnalyticsJson")
                         .HasColumnType("longtext");
 
                     b.Property<string>("AudioUrl")
@@ -102,15 +102,6 @@ namespace FirefliesBackend.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<double?>("ProjectPlanTemperature")
-                        .HasColumnType("double");
-
-                    b.Property<double?>("SentimentNegativePct")
-                        .HasColumnType("double");
-
-                    b.Property<double?>("SentimentNeutralPct")
-                        .HasColumnType("double");
-
-                    b.Property<double?>("SentimentPositivePct")
                         .HasColumnType("double");
 
                     b.Property<string>("Summary")

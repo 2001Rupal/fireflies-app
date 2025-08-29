@@ -49,36 +49,11 @@ builder.Services.AddCors(o => o.AddPolicy("AllowReactDev", p =>
 
 
 
-// Add JWT Authentication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            RequireSignedTokens = true, // Ensure a signature exists
-            ValidateIssuer = true,
-            ValidIssuer = "ProjectManagementSystem",
-            ValidateAudience = true,
-            ValidAudience = "FirefliesApp",
-            ValidateLifetime = true,
-           
-            
-            ValidateActor = false,
-
-            ValidateIssuerSigningKey = true,
-              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-super-long-development-secret-key-that-is-secure")),
-            ClockSkew = TimeSpan.Zero
-        };
-    });
-
-
 
 var app = builder.Build();
 
 
-// Add Authentication and Authorization middleware
-app.UseAuthentication();
-app.UseAuthorization(); 
+
 
 
 

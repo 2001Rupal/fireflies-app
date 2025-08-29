@@ -4,6 +4,7 @@ namespace FirefliesBackend.Models
     {
         public int DurationWeeks { get; set; }
         public string AdditionalDetails { get; set; } = string.Empty;
+         public double Temperature { get; set; } = 0.3;
     }
 
     public class ProjectPlanResponse
@@ -13,5 +14,11 @@ namespace FirefliesBackend.Models
         public int DurationWeeks { get; set; }
         public string AdditionalDetails { get; set; } = string.Empty;
         public DateTime GeneratedAt { get; set; }
+        public string? MeetingTitle { get; set; }
+        public string? FirefliesId { get; set; }
+        public double Temperature { get; set; } = 0.3;
     }
 }
+
+
+

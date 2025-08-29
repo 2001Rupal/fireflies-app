@@ -12,13 +12,14 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "gsap": "^3.13.0",
-    "lucide-react": "^0.539.0",
+    "lucide-react": "^0.541.0",
     "prismjs": "^1.30.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.8.0",
+    "react-window": "^1.8.11",
     "recharts": "^3.1.2",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.11"

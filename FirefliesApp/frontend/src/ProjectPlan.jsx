@@ -73,7 +73,9 @@ export default function ProjectPlan() {
         return;
       }
       const data = await res.json();
+       console.log("Fetched project plan:", data);
       setPlanData(data);
+     
       setEditedContent(cleanMarkdown(data.projectPlan ?? ""));
       await checkBacklogExists(id);
     } catch (err) {

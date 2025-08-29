@@ -646,7 +646,7 @@ a:focus-visible {
   transform: translateY(20px);
   opacity: 0;
   animation: slideUpFadeIn 0.5s forwards ease-out;
-  animation-delay: 1.8s;
+  animation-delay: 0s;
 }
 
 /* Enhanced particles animation */
@@ -710,17 +710,168 @@ a:focus-visible {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .logo-container {
-    flex-direction: column;
+    flex-direction: row;
+     align-items: center;
     gap: 8px;
     text-align: center;
+     justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: wrap; 
   }
   
-  .enhanced-logo {
-    font-size: 2rem;
+ .enhanced-logo {
+    font-size: 1.5rem; /* smaller for mobile */
+    white-space: normal; /* allow wrapping */
   }
   
-  .logo-icon {
-    width: 40px;
-    height: 40px;
+   .logo-icon {
+    width: 35px;
+    height: 35px;
   }
+  .tagline-container {
+    font-size: 0.75rem;
+  }
+}
+
+/* Network Status Banner Styles */
+.network-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 12px 0;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.network-banner.offline {
+  background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+  color: white;
+}
+
+.network-banner.online {
+  background: linear-gradient(135deg, #2ed573 0%, #1e90ff 100%);
+  color: white;
+}
+
+.network-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+.network-banner-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.network-banner-text {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+.network-banner-close {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  margin-left: 12px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.network-banner-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.network-banner-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.network-banner-progress-bar {
+  height: 100%;
+  width: 45%;
+  background: rgba(255, 255, 255, 0.6);
+  animation: progressAnimation 1.5s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes progressAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+/* Adjust main content when banner is visible */
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .network-banner-content {
+    padding: 0 15px;
+  }
+  
+  .network-banner-text {
+    font-size: 14px;
+    text-align: left;
+    padding-right: 30px;
+  }
+  
+  .network-banner-close {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
+  }
+}
+@media (max-width: 768px) {
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end; /* or center */
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+}
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  flex-wrap: wrap;
 }

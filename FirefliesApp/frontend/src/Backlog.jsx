@@ -343,11 +343,11 @@ export default function Backlog() {
               <ListTodo className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-white">Product Backlog</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-white">Project Backlog</h1>
               <div className="mt-2 text-sm text-slate-400 flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-blue-400" />
-                  <span>Agile Development Ready</span>
+                  <span>Backlog Development Ready</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-green-400" />

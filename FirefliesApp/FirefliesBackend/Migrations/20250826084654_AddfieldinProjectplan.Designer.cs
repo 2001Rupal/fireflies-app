@@ -4,6 +4,7 @@ using FirefliesBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirefliesBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250826084654_AddfieldinProjectplan")]
+    partial class AddfieldinProjectplan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +34,6 @@ namespace FirefliesBackend.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ActionItems")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("AnalyticsJson")
                         .HasColumnType("longtext");
 
                     b.Property<string>("AudioUrl")
@@ -84,9 +84,6 @@ namespace FirefliesBackend.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("OrganizerEmail")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("ProjectDetails")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -100,18 +97,6 @@ namespace FirefliesBackend.Migrations
 
                     b.Property<DateTime?>("ProjectPlanGeneratedAt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<double?>("ProjectPlanTemperature")
-                        .HasColumnType("double");
-
-                    b.Property<double?>("SentimentNegativePct")
-                        .HasColumnType("double");
-
-                    b.Property<double?>("SentimentNeutralPct")
-                        .HasColumnType("double");
-
-                    b.Property<double?>("SentimentPositivePct")
-                        .HasColumnType("double");
 
                     b.Property<string>("Summary")
                         .IsRequired()

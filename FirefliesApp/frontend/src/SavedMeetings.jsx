@@ -41,7 +41,7 @@ export default function SavedMeetings() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-4 md:p-6 rounded-3xl">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900/60 to-purple-900/70 text-white p-4 md:p-6 rounded-3xl">
       <div className="container mx-auto max-w-7xl">
         <div className="mb-5">
           <div className="flex items-center gap-4 mb-6">

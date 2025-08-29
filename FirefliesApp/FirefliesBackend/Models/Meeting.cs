@@ -34,6 +34,13 @@ namespace FirefliesBackend.Models
 
         public string Backlog { get; set; } = string.Empty;
         public DateTime? BacklogGeneratedAt { get; set; }
+        public double? ProjectPlanTemperature { get; set; }
+         public string? OrganizerEmail { get; set; }
+
+           public double? SentimentPositivePct { get; set; }
+        public double? SentimentNeutralPct { get; set; }
+        public double? SentimentNegativePct { get; set; }
+        public string? AnalyticsJson { get; set; } 
         
     }
 }
