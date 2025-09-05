@@ -23,7 +23,7 @@ namespace FirefliesBackend.Services
                 throw new ArgumentException("Fireflies:ApiKey is not configured.");
         }
 
-        public async Task<JsonDocument> QueryAsync(string graphqlQuery, object variables = null)
+        public async Task<JsonDocument> QueryAsync(string graphqlQuery, object? variables = null)
         {
             var payload = new { query = graphqlQuery, variables };
             using var req = new HttpRequestMessage(HttpMethod.Post, "graphql")

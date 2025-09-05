@@ -12,6 +12,8 @@ import Backlog from "./Backlog";
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import NotFound404 from "./NotFound404";
+import OAuthCallback from "./OAuthCallback";
+import Upcoming from './Upcoming';
 
 // Import the updated custom hook
 import useNetworkStatus from "./UseNetworkStatus";
@@ -228,6 +230,8 @@ export default function App() {
             <Route path="/project-plan/:dbId" element={<ProjectPlan />} />
             <Route path="/meeting/:dbId/backlog" element={<Backlog />} />
               <Route path="*" element={<NotFound404 />} />
+              <Route path="/auth/callback" element={<OAuthCallback />} />
+               <Route path="/upcoming" element={<Upcoming />} />
           </Routes>
         </main>
       </div>

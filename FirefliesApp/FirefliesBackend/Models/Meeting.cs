@@ -41,6 +41,8 @@ namespace FirefliesBackend.Models
         public double? SentimentNeutralPct { get; set; }
         public double? SentimentNegativePct { get; set; }
         public string? AnalyticsJson { get; set; } 
+
+        
         
     }
 }

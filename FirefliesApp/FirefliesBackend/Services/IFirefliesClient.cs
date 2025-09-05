@@ -5,7 +5,7 @@ namespace FirefliesBackend.Services
 {
     public interface IFirefliesClient
     {
-        Task<JsonDocument> QueryAsync(string graphqlQuery, object variables = null);
+        Task<JsonDocument> QueryAsync(string graphqlQuery, object? variables = null);
     }
 }
 

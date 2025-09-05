@@ -1617,20 +1617,9 @@ export default function MeetingDetail() {
                       </span>
                     </div>
                     
-                    {audioSrc && (
-                      <div className="flex items-center gap-2 bg-green-600/20 border border-green-500/30 px-4 py-2 rounded-xl">
-                        <Headphones size={16} className="text-green-400" />
-                        <span className="text-green-300 font-medium text-sm">Audio Available</span>
-                      </div>
-                    )}
+                   
 
-                    {/* Sentiment indicator badge */}
-                    {sentimentStats.hasAnalytics && (
-                      <div className="flex items-center gap-2 bg-indigo-600/20 border border-indigo-500/30 px-4 py-2 rounded-xl">
-                        <PieChart size={16} className="text-indigo-400" />
-                        <span className="text-indigo-300 font-medium text-sm">AI Sentiment Analysis</span>
-                      </div>
-                    )}
+                    
                   </div>
                 </div>
               </div>
@@ -1882,12 +1871,7 @@ export default function MeetingDetail() {
               </div>
               
               <div className="flex items-center gap-2">
-                {audioSrc && (
-                  <div className="flex items-center gap-2 bg-green-600/20 border border-green-500/30 px-4 py-2 rounded-xl">
-                    <Play size={14} className="text-green-400" />
-                    <span className="text-green-300 text-sm font-medium">Audio Ready</span>
-                  </div>
-                )}
+               
                 
                 {/* Sentiment filter for transcript */}
                 <div className="flex gap-1">
@@ -1929,11 +1913,11 @@ export default function MeetingDetail() {
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   Meeting Recording
                 </h4>
-                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/30">
+               
                   <audio 
                     controls 
                     src={audioSrc} 
-                    className="w-full h-12 bg-slate-700 rounded-lg"
+                    className="w-140 h-12 bg-slate-700 rounded-3xl "
                     style={{
                       filter: 'sepia(1) hue-rotate(200deg) saturate(1.5) brightness(1.2)'
                     }}
@@ -1942,7 +1926,7 @@ export default function MeetingDetail() {
                       Your browser does not support the audio element.
                     </div>
                   </audio>
-                </div>
+                
               </div>
             )}
             

@@ -2,7 +2,6 @@ using FirefliesBackend.Data;
 using FirefliesBackend.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -42,20 +41,16 @@ builder.Services.AddHttpClient("OpenAI", client =>
     );
 });
 
+// Register Google Calendar Service
+builder.Services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
+builder.Services.AddHttpClient<GoogleCalendarService>();
+
 // CORS for React dev
 builder.Services.AddCors(o => o.AddPolicy("AllowReactDev", p =>
-    p.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod()
+    p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
 ));
 
-
-
-
 var app = builder.Build();
-
-
-
-
-
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -63,4 +58,4 @@ app.UseCors("AllowReactDev");
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();  
+app.Run();
