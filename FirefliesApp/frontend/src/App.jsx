@@ -14,6 +14,7 @@ import "./App.css";
 import NotFound404 from "./NotFound404";
 import OAuthCallback from "./OAuthCallback";
 import Upcoming from './Upcoming';
+import ScrollToTop from './ScrollToTop';
 
 // Import the updated custom hook
 import useNetworkStatus from "./UseNetworkStatus";
@@ -190,6 +191,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+    <ScrollToTop />
       {/* Enhanced Network Status Banner */}
       <NetworkStatusBanner isOnline={isOnline} />
 
@@ -222,6 +224,7 @@ export default function App() {
 
         <main className="app-main" role="main">
           <Routes>
+            
             <Route path="/" element={<Home />} />
             <Route path="/meetings" element={<MeetingList />} />
             <Route path="/meetings/:id" element={<MeetingDetail />} />
